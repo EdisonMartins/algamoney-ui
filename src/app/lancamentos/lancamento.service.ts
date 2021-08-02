@@ -12,6 +12,8 @@ export class LancamentoService {
 
   pesquisar(): Promise<any> {
     const headers = new Headers();
+    // Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==
+    // admin@algamoney.com:admin
     headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
     return this.http.get(`${this.lancamentosUrl}?resumo`, { headers })
