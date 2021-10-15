@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lancamentos-pesquisa.component.css']
 })
 export class LancamentosPesquisaComponent {
+  descricao: string;
   lancamentos = [];
 
   constructor(private lancamentoService: LancamentoService) { }
@@ -21,7 +22,8 @@ export class LancamentosPesquisaComponent {
 
   pesquisar() {
     console.log("pesquisar()");
-    this.lancamentoService.pesquisar()
+    console.log("Descrição: " + this.descricao);
+    this.lancamentoService.pesquisar({ descricao: this.descricao })
     .then(lancamentos => this.lancamentos = lancamentos);
   }
 
