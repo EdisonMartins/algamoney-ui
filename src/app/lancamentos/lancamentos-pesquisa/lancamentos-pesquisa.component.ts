@@ -7,10 +7,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './lancamentos-pesquisa.component.html',
   styleUrls: ['./lancamentos-pesquisa.component.css']
 })
-export class LancamentosPesquisaComponent {
-  descricao: string
-  dataVencimentoInicio: Date;
-  dataVencimentoFim: Date;;
+export class LancamentosPesquisaComponent implements OnInit {
+  filtro = new LancamentoFiltro();
   lancamentos = [];
 
   constructor(private lancamentoService: LancamentoService) { }
@@ -24,14 +22,10 @@ export class LancamentosPesquisaComponent {
   }
 
   pesquisar() {
-    console.log("pesquisar()");
-    const filtro: LancamentoFiltro = {
-      descricao: this.descricao,
-      dataVencimentoInicio: this.dataVencimentoInicio,
-      dataVencimentoFim: this.dataVencimentoFim
-    };
-    this.lancamentoService.pesquisar(filtro)
-    .then(lancamentos => this.lancamentos = lancamentos);
+    this.lancamentoService.pesquisar(this.filtro)
+      .then(resultado => {
+        this.lancamentos = resultado.lancamentos;
+      });
   }
 
 }

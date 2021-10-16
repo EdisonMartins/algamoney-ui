@@ -3,10 +3,12 @@ import { Http, Headers, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import * as moment from 'moment';
 
-export interface LancamentoFiltro {
+export class LancamentoFiltro {
   descricao: string;
   dataVencimentoInicio: Date;
   dataVencimentoFim: Date;
+  pagina = 0;
+  itensPorPagina = 5;
 }
 
 @Injectable()
@@ -23,6 +25,9 @@ export class LancamentoService {
     // admin@algamoney.com:admin
     headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
+    params.set('page', filtro.pagina.toString());
+    params.set('size', filtro.itensPorPagina.toString());
+
     if (filtro.descricao) {
       console.log("filtro.descricao: " + filtro.descricao);
       params.set('descricao', filtro.descricao.trim());
@@ -38,9 +43,20 @@ export class LancamentoService {
         moment(filtro.dataVencimentoFim).format('YYYY-MM-DD'));
     }
 
-    return this.http.get(`${this.lancamentosUrl}?resumo`, { headers, search: params })
+    return this.http.get(`${this.lancamentosUrl}?resumo`,
+      { headers, search: params })
       .toPromise()
-      .then(response => response.json().content);
+      .then(response => {
+        const responseJson = response.json();
+        const lancamentos = responseJson.content;
+
+        const resultado = {
+          lancamentos,
+          total: responseJson.totalElements
+        };
+
+        return resultado;
+      })
   }
 
 }
