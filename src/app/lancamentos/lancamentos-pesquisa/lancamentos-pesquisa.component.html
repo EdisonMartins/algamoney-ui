@@ -62,11 +62,12 @@
         <p-column styleClass="col-acoes">
           <ng-template pTemplate="body"
                        let-lanc="rowData">
-            <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+            <a pButton icon="fa-pencil" pTooltip="Editar"
+                       tooltipPosition="top"></a>
             <button pButton icon="fa-trash"
                             pTooltip="Excluir"
                             tooltipPosition="top"
-                            (click)="excluir(lanc)">
+                            (click)="confirmarExclusao(lanc)">
             </button>
           </ng-template>
         </p-column>

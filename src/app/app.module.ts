@@ -6,6 +6,8 @@ import { NgModule } from '@angular/core';
 
 // Importações de terceiros
 import { ToastyModule } from 'ng2-toasty';
+import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
+import { ConfirmationService } from 'primeng/components/common/confirmationservice';
 
 // Importações do projeto
 import { AppComponent } from './app.component';
@@ -14,6 +16,7 @@ import { PessoaService } from './pessoas/pessoa.service';
 import { LancamentoService } from './lancamentos/lancamento.service';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
+
 
 
 @NgModule({
@@ -26,13 +29,18 @@ import { LancamentosModule } from './lancamentos/lancamentos.module';
     HttpModule,
 
     ToastyModule.forRoot(),
+    ConfirmDialogModule,
 
     CoreModule,
     LancamentosModule,
     PessoasModule
 
   ],
-  providers: [LancamentoService, PessoaService],
+  providers: [
+    LancamentoService,
+    PessoaService,
+    ConfirmationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
