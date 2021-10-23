@@ -1,0 +1,62 @@
+import { Injectable } from '@angular/core';
+import { Http, Headers, URLSearchParams } from '@angular/http';
+
+export class PessoaFiltro {
+  nome: string;
+  pagina = 0;
+  itensPorPagina = 5;
+}
+
+@Injectable()
+export class PessoaService {
+
+  pessoasUrl = 'http://localhost:8080/pessoas';
+
+  constructor(private http: Http) { }
+
+  pesquisar(filtro: PessoaFiltro): Promise<any> {
+    const params = new URLSearchParams();
+    const headers = new Headers();
+    // Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==
+    // admin@algamoney.com:admin
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    params.set('page', filtro.pagina.toString());
+    params.set('size', filtro.itensPorPagina.toString());
+
+    if (filtro.nome) {
+      console.log("filtro.nome: " + filtro.nome);
+      params.set('nome', filtro.nome.trim());
+    }
+
+    return this.http.get(`${this.pessoasUrl}`,
+      { headers, search: params })
+      .toPromise()
+      .then(response => {
+        const responseJson = response.json();
+        const pessoas = responseJson.content;
+
+        const resultado = {
+          pessoas,
+          total: responseJson.totalElements
+        };
+
+        return resultado;
+      })
+  }
+
+  listaTodas(): Promise<any> {
+    const headers = new Headers();
+    // Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==
+    // admin@algamoney.com:admin
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+
+
+    return this.http.get(`${this.pessoasUrl}`,
+      { headers })
+      .toPromise()
+      .then(response => response.json().content);
+  }
+
+}
