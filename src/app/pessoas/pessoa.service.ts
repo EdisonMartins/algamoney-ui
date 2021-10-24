@@ -50,13 +50,19 @@ export class PessoaService {
     // Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==
     // admin@algamoney.com:admin
     headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-
-
     return this.http.get(`${this.pessoasUrl}`,
       { headers })
       .toPromise()
       .then(response => response.json().content);
+  }
+
+  excluir(codigo: number): Promise<void> {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.delete(`${this.pessoasUrl}/${codigo}`, { headers })
+      .toPromise()
+      .then(() => null);
   }
 
 }

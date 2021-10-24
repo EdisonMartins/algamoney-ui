@@ -29,7 +29,8 @@
                    [rows]="filtro.itensPorPagina"
                    [lazy]="true"
                    [totalRecords]="totalRegistros"
-                   (onLazyLoad)="aoMudarPagina($event)">
+                   (onLazyLoad)="aoMudarPagina($event)"
+                   #tabela>
         <p-column field="nome" header="Nome"></p-column>
         <p-column field="cidade" header="Cidade"></p-column>
         <p-column field="estado" header="Estado"></p-column>
@@ -41,9 +42,14 @@
           </ng-template>
         </p-column>
         <p-column styleClass="col-acoes">
-          <ng-template pTemplate="body">
+          <ng-template pTemplate="body"
+                       let-pessoa="rowData">
             <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
-            <button pButton icon="fa-trash" pTooltip="Excluir"></button>
+            <button pButton icon="fa-trash"
+                            pTooltip="Excluir"
+                            (click)="confirmarExclusao(pessoa)"
+                            >
+          </button>
           </ng-template>
         </p-column>
 
