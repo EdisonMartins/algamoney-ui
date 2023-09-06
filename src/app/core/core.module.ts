@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 // Importações de terceiros
 import { ConfirmationService } from 'primeng/components/common/confirmationservice';
 import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
-import { ToastyModule } from 'ng2-toasty';
 
 // Importações do projeto
 import { ErrorHandlerService } from './error-handler.service';
@@ -19,13 +18,11 @@ import { NavbarComponent } from './navbar/navbar.component';
   imports: [
     CommonModule,
 
-    ToastyModule.forRoot(),
     ConfirmDialogModule,
   ],
   declarations: [NavbarComponent],
   exports: [
     NavbarComponent,
-    ToastyModule,
     ConfirmDialogModule
   ],
 
