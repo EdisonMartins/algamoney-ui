@@ -31,16 +31,16 @@ export class LancamentoService {
 
     if (filtro.descricao) {
       console.log("filtro.descricao: " + filtro.descricao);
-      params.set('descricao', filtro.descricao.trim());
+      params = params.set('descricao', filtro.descricao.trim());
     }
 
     if (filtro.dataVencimentoInicio) {
-      params.set('dataVencimentoDe',
+      params = params.set('dataVencimentoDe',
         moment(filtro.dataVencimentoInicio).format('YYYY-MM-DD'));
     }
 
     if (filtro.dataVencimentoFim) {
-      params.set('dataVencimentoAte',
+      params = params.set('dataVencimentoAte',
         moment(filtro.dataVencimentoFim).format('YYYY-MM-DD'));
     }
 
@@ -60,8 +60,8 @@ export class LancamentoService {
   }
 
   excluir(codigo: number): Promise<void> {
-    const headers = new HttpHeaders();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
     return this.http.delete(`${this.lancamentosUrl}/${codigo}`, { headers })
       .toPromise()

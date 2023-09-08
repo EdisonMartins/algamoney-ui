@@ -61,6 +61,7 @@ export class LancamentosPesquisaComponent implements OnInit {
         if (this.grid.first === 0) {
           this.pesquisar();
         } else {
+          // Reseta a tabela para primeira página .
           this.grid.first = 0;
         }
         console.log('toast: Lançamento excluído com sucesso!')

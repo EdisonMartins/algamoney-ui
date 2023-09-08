@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 export class PessoaFiltro {
   nome: string;
@@ -12,33 +12,32 @@ export class PessoaService {
 
   pessoasUrl = 'http://localhost:8080/pessoas';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   pesquisar(filtro: PessoaFiltro): Promise<any> {
-    const params = new URLSearchParams();
-    const headers = new Headers();
+    let params = new HttpParams();
+    let headers = new HttpHeaders();
     // Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==
     // admin@algamoney.com:admin
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    params.set('page', filtro.pagina.toString());
-    params.set('size', filtro.itensPorPagina.toString());
+    params = params.set('page', filtro.pagina.toString());
+    params = params.set('size', filtro.itensPorPagina.toString());
 
     if (filtro.nome) {
       console.log("filtro.nome: " + filtro.nome);
-      params.set('nome', filtro.nome.trim());
+      params = params.set('nome', filtro.nome.trim());
     }
 
     return this.http.get(`${this.pessoasUrl}`,
-      { headers, search: params })
+      { headers, params })
       .toPromise()
       .then(response => {
-        const responseJson = response.json();
-        const pessoas = responseJson.content;
+        const pessoas = response['content'];
 
         const resultado = {
           pessoas,
-          total: responseJson.totalElements
+          total: response['totalElements']
         };
 
         return resultado;
@@ -46,19 +45,19 @@ export class PessoaService {
   }
 
   listaTodas(): Promise<any> {
-    const headers = new Headers();
+    let headers = new HttpHeaders();
     // Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==
     // admin@algamoney.com:admin
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     return this.http.get(`${this.pessoasUrl}`,
       { headers })
       .toPromise()
-      .then(response => response.json().content);
+      .then(response => response['totalElements']);
   }
 
   excluir(codigo: number): Promise<void> {
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
     return this.http.delete(`${this.pessoasUrl}/${codigo}`, { headers })
       .toPromise()
@@ -66,9 +65,9 @@ export class PessoaService {
   }
 
   mudarStatus(codigo: number, ativo: boolean): Promise<void> {
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-    headers.append('Content-Type', 'application/json');
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers = headers.append('Content-Type', 'application/json');
 
     return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers })
       .toPromise()

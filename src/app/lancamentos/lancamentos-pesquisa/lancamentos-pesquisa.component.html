@@ -39,7 +39,7 @@
                    [paginator]="true"
                    [rows]="filtro.itensPorPagina"
                    [lazy]="true"
-                   [totalRecords]="total"
+                   [totalRecords]="totalRegistros"
                    (onLazyLoad)="aoMudarPagina($event)"
                    #tabela>
         <p-column field="pessoa" header="Pessoa"></p-column>
