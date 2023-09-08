@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import * as moment from 'moment';
+import { DatePipe } from '@angular/common';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -16,17 +17,17 @@ export class LancamentoService {
 
   lancamentosUrl = 'http://localhost:8080/lancamentos';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   pesquisar(filtro: LancamentoFiltro): Promise<any> {
-    const params = new URLSearchParams();
-    const headers = new Headers();
+    let params = new HttpParams();
+    let headers = new HttpHeaders();
     // Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==
     // admin@algamoney.com:admin
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    params.set('page', filtro.pagina.toString());
-    params.set('size', filtro.itensPorPagina.toString());
+    params = params.set('page', filtro.pagina.toString());
+    params = params.set('size', filtro.itensPorPagina.toString());
 
     if (filtro.descricao) {
       console.log("filtro.descricao: " + filtro.descricao);
@@ -43,24 +44,23 @@ export class LancamentoService {
         moment(filtro.dataVencimentoFim).format('YYYY-MM-DD'));
     }
 
-    return this.http.get(`${this.lancamentosUrl}?resumo`,
-      { headers, search: params })
-      .toPromise()
-      .then(response => {
-        const responseJson = response.json();
-        const lancamentos = responseJson.content;
 
-        const resultado = {
-          lancamentos,
-          total: responseJson.totalElements
-        };
+    return this.http.get(`${this.lancamentosUrl}?resumo`, { headers, params })
+    .toPromise()
+    .then((response: any) => {
+      const lancamentos = response['content'];
 
-        return resultado;
-      })
+      const resultado = {
+        lancamentos,
+        total: response['totalElements']
+      };
+
+      return resultado;
+    });
   }
 
   excluir(codigo: number): Promise<void> {
-    const headers = new Headers();
+    const headers = new HttpHeaders();
     headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
     return this.http.delete(`${this.lancamentosUrl}/${codigo}`, { headers })

@@ -39,19 +39,19 @@
                    [paginator]="true"
                    [rows]="filtro.itensPorPagina"
                    [lazy]="true"
-                   [totalRecords]="totalRegistros"
+                   [totalRecords]="total"
                    (onLazyLoad)="aoMudarPagina($event)"
                    #tabela>
         <p-column field="pessoa" header="Pessoa"></p-column>
         <p-column field="descricao" header="Descrição"></p-column>
         <p-column header="Vencimento" styleClass="col-data">
           <ng-template let-lanc="rowData" pTemplate="body">
-            <span>{{ lanc.dataVencimento | date:'dd/MM/yyyy' }}</span>
+            <span>{{ lanc.dataVencimento | date:'dd/MM/yyyy' : 'pt-BR' }}</span>
           </ng-template>
         </p-column>
         <p-column header="Pagamento" styleClass="col-data">
           <ng-template let-lanc="rowData" pTemplate="body">
-            <span>{{ lanc.dataPagamento | date:'dd/MM/yyyy' }}</span>
+            <span>{{ lanc.dataPagamento | date:'dd/MM/yyyy' : 'pt-BR' }}</span>
           </ng-template>
         </p-column>
         <p-column field="valor" header="Valor" styleClass="col-valor">
