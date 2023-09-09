@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 // Importações de terceiros
 import { ConfirmationService } from 'primeng/components/common/confirmationservice';
 import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 // Importações do projeto
 import { ErrorHandlerService } from './error-handler.service';
@@ -33,6 +34,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     CategoriaService,
     ErrorHandlerService,
 
+    MessageService,
     ConfirmationService,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ]
