@@ -11,7 +11,7 @@ export class CategoriaService {
   constructor(private http: HttpClient) { }
 
 
-  listaTodas(): Promise<any> {
+  listarTodas(): Promise<any> {
     let headers = new HttpHeaders();
     // Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==
     // admin@algamoney.com:admin

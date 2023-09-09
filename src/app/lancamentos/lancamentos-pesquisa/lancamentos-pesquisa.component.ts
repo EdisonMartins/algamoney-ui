@@ -19,7 +19,7 @@ export class LancamentosPesquisaComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private errorHandler: ErrorHandlerService,
     private confirmation: ConfirmationService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -38,7 +38,7 @@ export class LancamentosPesquisaComponent implements OnInit {
         this.lancamentos = resultado.lancamentos;
       })
       .catch(erro => this.errorHandler.handle(erro));
-      ;
+    ;
   }
 
   aoMudarPagina(event: LazyLoadEvent) {
@@ -67,7 +67,6 @@ export class LancamentosPesquisaComponent implements OnInit {
         console.log('toast: Lançamento excluído com sucesso!')
       })
       .catch(erro => this.errorHandler.handle(erro));
-      ;
+    ;
   }
-
 }
