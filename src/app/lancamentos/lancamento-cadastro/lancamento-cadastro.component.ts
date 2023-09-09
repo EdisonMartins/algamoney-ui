@@ -1,3 +1,5 @@
+import { FormControl } from '@angular/forms';
+import { Lancamento } from './../../core/model';
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../categorias/categoria.service';
 import { ErrorHandlerService } from '../../core/error-handler.service';
@@ -15,8 +17,9 @@ export class LancamentoCadastroComponent implements OnInit {
     { label: 'Despesa', value: 'DESPESA' },
   ];
 
-  categorias = [];
+  lancamento = new Lancamento();
 
+  categorias = [];
   pessoas = [];
 
   constructor(
@@ -44,7 +47,8 @@ export class LancamentoCadastroComponent implements OnInit {
     return this.categoriaService.listarTodas()
       .then(categorias => {
         // Transformar o array de categorias em um objeto com os campos 'label' e 'value'.
-        // O 'map' irá percorrer todos elementos do array e chamará um função para cada elemento. A função chamada retornará um novo Array.
+        // O 'map' irá percorrer todos elementos do array e chamará um função para cada elemento.
+        // A função chamada retornará um novo Array.
         this.categorias = categorias.map(c => ({ label: c.nome, value: c.codigo }));
       })
       .catch(erro => this.errorHandler.handle(erro));
@@ -56,6 +60,10 @@ export class LancamentoCadastroComponent implements OnInit {
         this.pessoas = pessoas.map(p => ({ label: p.nome, value: p.codigo }));
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  salvar(form: FormControl) {
+    console.log(this.lancamento);
   }
 
 }
