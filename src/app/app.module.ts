@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
+import { GrowlModule } from 'primeng/components/growl/growl';
 
 // Importações do projeto
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ registerLocaleData(localePT);
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    GrowlModule,
 
     CoreModule,
     LancamentosModule,

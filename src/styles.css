@@ -45,4 +45,10 @@ label {
   width: 14.6667%;
 }
 
+.ui-growl {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 20em;
+}
 

@@ -6,13 +6,14 @@ import { CategoriaService } from '../../categorias/categoria.service';
 import { ErrorHandlerService } from '../../core/error-handler.service';
 import { PessoaService } from '../../pessoas/pessoa.service';
 import { LancamentoService } from '../lancamento.service';
+import { BaseComponent } from '../../shared/BaseComponent';
 
 @Component({
   selector: 'app-lancamento-cadastro',
   templateUrl: './lancamento-cadastro.component.html',
   styleUrls: ['./lancamento-cadastro.component.css']
 })
-export class LancamentoCadastroComponent implements OnInit {
+export class LancamentoCadastroComponent extends BaseComponent implements OnInit {
 
   tipos = [
     { label: 'Receita', value: 'RECEITA' },
@@ -28,9 +29,12 @@ export class LancamentoCadastroComponent implements OnInit {
     private pessoaService: PessoaService,
     private categoriaService: CategoriaService,
     private lancamentoService: LancamentoService,
-    private messageService: MessageService,
+    messageService: MessageService,
     private errorHandler: ErrorHandlerService
-  ) { }
+  ) {
+    super(messageService);
+
+  }
   pt_BR: any;
 
   ngOnInit() {
@@ -70,11 +74,11 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.adicionar(this.lancamento)
       .then(() => {
         console.log("Lançamento adicionado com sucesso!")
+        this.addMsgSuccess(this.lancamento.descricao, "Lançamento adicionado com sucesso!");
         form.reset();
         this.lancamento = new Lancamento();
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
-
 
 }

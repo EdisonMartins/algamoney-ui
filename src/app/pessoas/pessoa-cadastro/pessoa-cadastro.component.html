@@ -1,5 +1,5 @@
 <div class="container">
-  <form #f="ngForm" autocomplete="off">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
     <div class="ui-g">
 
         <div class="ui-g-12">
@@ -8,7 +8,12 @@
 
         <div class="ui-g-12 ui-md-12 ui-fluid">
           <label>Nome</label>
-          <input pInputText type="text" name="nome" ngModel #nome="ngModel" required minlength="5">
+          <input pInputText type="text"
+            name="nome"
+            [(ngModel)]="pessoa.nome"
+            #nome="ngModel"
+            required
+            minlength="5">
           <app-message [control]="nome"
                         error="required"
                         text="Informe um nome">
@@ -22,7 +27,10 @@
 
         <div class="ui-g-12 ui-md-9 ui-fluid">
             <label>Logradouro</label>
-            <input pInputText type="text" name="logradouro" ngModel #logradouro="ngModel" required>
+            <input pInputText type="text"
+              name="logradouro"
+              [(ngModel)]="pessoa.endereco.logradouro"
+              #logradouro="ngModel" required>
             <app-message [control]="logradouro"
                          error="required"
                          text="Informe o logradouro">
@@ -31,7 +39,12 @@
 
         <div class="ui-g-12 ui-md-3 ui-fluid">
             <label>Número</label>
-            <input pInputText type="text" name="numero" ngModel #numero="ngModel" required>
+            <input pInputText
+              type="text"
+              name="numero"
+              [(ngModel)]="pessoa.endereco.numero"
+              #numero="ngModel"
+              required>
             <app-message [control]="numero"
                           error="required"
                           text="Informe o numero">
@@ -40,12 +53,20 @@
 
         <div class="ui-g-12 ui-md-4 ui-fluid">
             <label>Complemento</label>
-            <input pInputText type="text">
+            <input pInputText
+              [(ngModel)]="pessoa.endereco.complemento"
+              name="complemento"
+              type="text">
         </div>
 
         <div class="ui-g-12 ui-md-4 ui-fluid">
             <label>Bairro</label>
-            <input pInputText type="text" name="bairro" ngModel #bairro="ngModel" required>
+            <input pInputText
+              type="text"
+              name="bairro"
+              [(ngModel)]="pessoa.endereco.bairro"
+              #bairro="ngModel"
+              required>
             <app-message [control]="bairro"
                           error="required"
                           text="Informe o bairro">
@@ -54,7 +75,13 @@
 
         <div class="ui-g-12 ui-md-4 ui-fluid">
             <label>CEP</label>
-            <p-inputMask mask="99.999-999" name="cep" ngModel #cep="ngModel" required></p-inputMask>
+            <p-inputMask
+              mask="99.999-999"
+              name="cep"
+              [(ngModel)]="pessoa.endereco.cep"
+              #cep="ngModel"
+              required>
+            </p-inputMask>
             <app-message [control]="cep"
                           error="required"
                           text="Informe o cep">
@@ -63,7 +90,12 @@
 
         <div class="ui-g-12 ui-md-6 ui-fluid">
             <label>Cidade</label>
-            <input pInputText type="text" name="cidade" ngModel #cidade="ngModel" required>
+            <input pInputText
+              type="text"
+              name="cidade"
+              [(ngModel)]="pessoa.endereco.cidade"
+              #cidade="ngModel"
+              required>
             <app-message [control]="cidade"
                           error="required"
                           text="Informe a cidade">
@@ -72,7 +104,12 @@
 
         <div class="ui-g-12 ui-md-6 ui-fluid">
             <label>Estado</label>
-            <input pInputText type="text" name="estado" ngModel #estado="ngModel" required>
+            <input pInputText
+              type="text"
+              name="estado"
+              [(ngModel)]="pessoa.endereco.estado"
+              #estado="ngModel"
+              required>
             <app-message [control]="estado"
                          error="required"
                          text="Informe o estado">
