@@ -12,8 +12,20 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
+import { RouterModule, Routes } from '@angular/router';
+
+// Componentes
+import { LancamentosPesquisaComponent } from './lancamentos/lancamentos-pesquisa/lancamentos-pesquisa.component';
+import { LancamentoCadastroComponent } from './lancamentos/lancamento-cadastro/lancamento-cadastro.component';
+import { PessoasPesquisaComponent } from './pessoas/pessoas-pesquisa/pessoas-pesquisa.component';
 
 registerLocaleData(localePT);
+
+const routes: Routes = [
+  { path: 'lancamentos', component: LancamentosPesquisaComponent },
+  { path: 'lancamentos/novo', component: LancamentoCadastroComponent },
+  { path: 'pessoas', component: PessoasPesquisaComponent }
+];
 
 @NgModule({
   declarations: [
@@ -23,8 +35,10 @@ registerLocaleData(localePT);
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    GrowlModule,
+    RouterModule,
+    RouterModule.forRoot(routes),
 
+    GrowlModule,
     CoreModule,
     LancamentosModule,
     PessoasModule

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { SharedModule } from './../shared/shared.module';
 
@@ -18,9 +19,11 @@ import { FormsModule } from '@angular/forms';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     FormsModule,
     InputTextModule,
     ButtonModule,

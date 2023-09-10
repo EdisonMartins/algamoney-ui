@@ -1,6 +1,7 @@
 // Importações do Angular
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 // Importações de terceiros
 import { ConfirmationService } from 'primeng/components/common/confirmationservice';
@@ -16,11 +17,12 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 
 
+
 @NgModule({
   imports: [
     CommonModule,
-
     ConfirmDialogModule,
+    RouterModule
   ],
   declarations: [NavbarComponent],
   exports: [
