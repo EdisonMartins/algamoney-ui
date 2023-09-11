@@ -7,6 +7,7 @@ import { ErrorHandlerService } from '../../core/error-handler.service';
 import { PessoaService } from '../../pessoas/pessoa.service';
 import { LancamentoService } from '../lancamento.service';
 import { BaseComponent } from '../../shared/BaseComponent';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -26,11 +27,12 @@ export class LancamentoCadastroComponent extends BaseComponent implements OnInit
   pessoas = [];
 
   constructor(
+    messageService: MessageService,
     private pessoaService: PessoaService,
     private categoriaService: CategoriaService,
     private lancamentoService: LancamentoService,
-    messageService: MessageService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private route: ActivatedRoute
   ) {
     super(messageService);
 
@@ -38,6 +40,7 @@ export class LancamentoCadastroComponent extends BaseComponent implements OnInit
   pt_BR: any;
 
   ngOnInit() {
+    console.log(this.route.snapshot.params['codigo']);
     this.pt_BR = {
       firstDayOfWeek: 0,
       dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
