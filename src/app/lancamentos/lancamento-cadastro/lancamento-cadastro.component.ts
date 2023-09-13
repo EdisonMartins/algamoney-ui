@@ -41,6 +41,12 @@ export class LancamentoCadastroComponent extends BaseComponent implements OnInit
 
   ngOnInit() {
     console.log(this.route.snapshot.params['codigo']);
+    const codigoLancamento = this.route.snapshot.params['codigo'];
+
+    if (codigoLancamento) {
+      this.carregarLancamento(codigoLancamento);
+    }
+
     this.pt_BR = {
       firstDayOfWeek: 0,
       dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
@@ -82,6 +88,18 @@ export class LancamentoCadastroComponent extends BaseComponent implements OnInit
         this.lancamento = new Lancamento();
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarLancamento(codigo: number) {
+    this.lancamentoService.buscarPorCodigo(codigo)
+      .then(lancamento => {
+        this.lancamento = lancamento;
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  get editando() {
+    return Boolean(this.lancamento.codigo)
   }
 
 }
