@@ -7,7 +7,7 @@ import { ErrorHandlerService } from '../../core/error-handler.service';
 import { PessoaService } from '../../pessoas/pessoa.service';
 import { LancamentoService } from '../lancamento.service';
 import { BaseComponent } from '../../shared/BaseComponent';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -32,7 +32,8 @@ export class LancamentoCadastroComponent extends BaseComponent implements OnInit
     private categoriaService: CategoriaService,
     private lancamentoService: LancamentoService,
     private errorHandler: ErrorHandlerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     super(messageService);
 
@@ -92,8 +93,9 @@ export class LancamentoCadastroComponent extends BaseComponent implements OnInit
       .then(() => {
         console.log("Lançamento adicionado com sucesso!")
         this.addMsgSuccess(this.lancamento.descricao, "Lançamento adicionado com sucesso!");
-        form.reset();
-        this.lancamento = new Lancamento();
+        //form.reset();
+        //this.lancamento = new Lancamento();
+        this.router.navigate(['/lancamentos', this.lancamento.codigo]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -118,6 +120,16 @@ export class LancamentoCadastroComponent extends BaseComponent implements OnInit
 
   get editando() {
     return Boolean(this.lancamento.codigo)
+  }
+
+  novo(form: FormControl) {
+    form.reset();
+
+    setTimeout(function() {
+      this.lancamento = new Lancamento();
+    }.bind(this), 1);
+
+    this.router.navigate(['/lancamentos/novo']);
   }
 
 }
