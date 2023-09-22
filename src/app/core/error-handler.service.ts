@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Injectable()
 export class ErrorHandlerService {
 
-  constructor() { }
+  constructor(private messageService: MessageService) { }
 
   handle(errorResponse: any) {
     let msg: string;
@@ -29,8 +30,17 @@ export class ErrorHandlerService {
       msg = 'Erro ao processar serviço remoto. Tente novamente.';
       console.error('Ocorreu um erro', errorResponse);
     }
+    this.addMsgError("Erro encontrado!", msg);
+  }
 
-    console.error('Toasty: ' + msg);
+
+  private addMsgError(titulo: string, mensagem: string) {
+    this.messageService.add(
+      {
+        severity: 'error',
+        summary: titulo,
+        detail: mensagem
+      });
   }
 
 }

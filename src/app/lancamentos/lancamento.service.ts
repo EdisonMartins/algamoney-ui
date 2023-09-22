@@ -84,7 +84,7 @@ export class LancamentoService {
     headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers = headers.append('Content-Type', 'application/json');
 
-    return this.http.put<Lancamento>(this.lancamentosUrl, lancamento, { headers })
+    return this.http.put<Lancamento>(`${this.lancamentosUrl}/${lancamento.codigo}`, lancamento, { headers })
       .toPromise()
       .then(response => {
         const lancamentoAlterado = response as Lancamento;
