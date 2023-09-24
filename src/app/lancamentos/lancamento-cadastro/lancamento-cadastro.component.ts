@@ -8,6 +8,7 @@ import { PessoaService } from '../../pessoas/pessoa.service';
 import { LancamentoService } from '../lancamento.service';
 import { BaseComponent } from '../../shared/BaseComponent';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -33,7 +34,8 @@ export class LancamentoCadastroComponent extends BaseComponent implements OnInit
     private lancamentoService: LancamentoService,
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) {
     super(messageService);
 
@@ -43,6 +45,7 @@ export class LancamentoCadastroComponent extends BaseComponent implements OnInit
   ngOnInit() {
     console.log(this.route.snapshot.params['codigo']);
     const codigoLancamento = this.route.snapshot.params['codigo'];
+    this.title.setTitle('Novo lançamento');
 
     if (codigoLancamento) {
       this.carregarLancamento(codigoLancamento);
@@ -106,6 +109,7 @@ export class LancamentoCadastroComponent extends BaseComponent implements OnInit
         this.lancamento = lancamento;
 
         this.addMsgSuccess(this.lancamento.descricao, 'Lançamento alterado com sucesso!');
+        this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -114,6 +118,7 @@ export class LancamentoCadastroComponent extends BaseComponent implements OnInit
     this.lancamentoService.buscarPorCodigo(codigo)
       .then(lancamento => {
         this.lancamento = lancamento;
+        this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -130,6 +135,10 @@ export class LancamentoCadastroComponent extends BaseComponent implements OnInit
     }.bind(this), 1);
 
     this.router.navigate(['/lancamentos/novo']);
+  }
+
+  atualizarTituloEdicao() {
+    this.title.setTitle(`Edição de lançamento: ${this.lancamento.descricao}`);
   }
 
 }
