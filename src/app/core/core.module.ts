@@ -14,6 +14,7 @@ import { PessoaService } from '../pessoas/pessoa.service';
 import { LancamentoService } from '../lancamentos/lancamento.service';
 import { CategoriaService } from '../categorias/categoria.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 
 
 
@@ -24,7 +25,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     ConfirmDialogModule,
     RouterModule
   ],
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, PaginaNaoEncontradaComponent],
   exports: [
     NavbarComponent,
     ConfirmDialogModule

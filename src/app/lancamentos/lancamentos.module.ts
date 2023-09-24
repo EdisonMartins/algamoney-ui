@@ -42,9 +42,6 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
     LancamentoCadastroComponent
 ],
 
-  exports: [
-    LancamentosPesquisaComponent,
-    LancamentoCadastroComponent
-  ]
+  exports: []
 })
 export class LancamentosModule { }

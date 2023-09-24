@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import * as moment from 'moment';
-import { Lancamento } from '../core/model';
 import { Observable } from 'rxjs';
 
 export class LancamentoFiltro {
