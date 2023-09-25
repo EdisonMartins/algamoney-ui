@@ -12,7 +12,6 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
-import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
 registerLocaleData(localePT);
@@ -26,11 +25,11 @@ registerLocaleData(localePT);
     BrowserAnimationsModule,
     HttpClientModule,
 
-    AppRoutingModule,
     GrowlModule,
     CoreModule,
     LancamentosModule,
-    PessoasModule
+    PessoasModule,
+    AppRoutingModule
 
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'pt-br' }],
