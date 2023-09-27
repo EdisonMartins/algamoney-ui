@@ -80,7 +80,37 @@ export class PessoaService {
     headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers = headers.append('Content-Type', 'application/json');
     return this.http.post<Pessoa>(this.pessoasUrl, pessoa, { headers })
-    .toPromise();
+    .toPromise()
+    .then(response => {
+      const pessoaAdicionada = response as Pessoa;
+      return pessoaAdicionada;
+    });
+  }
+
+  atualizar(pessoa: Pessoa): Promise<Pessoa> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this.http.put<Pessoa>(`${this.pessoasUrl}/${pessoa.codigo}`, pessoa, { headers })
+      .toPromise()
+      .then(response => {
+        const pessoaAlterada = response as Pessoa;
+        return pessoaAlterada;
+      });
+  }
+
+  buscarPorCodigo(codigo: number): Promise<Pessoa>  {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this.http.get<Pessoa>(`${this.pessoasUrl}/${codigo}`, { headers })
+    .toPromise()
+    .then(response => {
+      const pessoaRecuperada = response as Pessoa;
+      return pessoaRecuperada;
+    });
   }
 
 }

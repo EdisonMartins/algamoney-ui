@@ -75,7 +75,14 @@ export class LancamentoService {
     headers = headers.append('Content-Type', 'application/json');
 
     return this.http.post<Lancamento>(this.lancamentosUrl, lancamento, { headers })
-      .toPromise();
+      .toPromise()
+      .then(response => {
+        const lancamentoAdicionado = response as Lancamento;
+
+        this.converterStringsParaDatas([lancamentoAdicionado]);
+
+        return lancamentoAdicionado;
+      });
   }
 
   atualizar(lancamento: Lancamento): Promise<Lancamento> {

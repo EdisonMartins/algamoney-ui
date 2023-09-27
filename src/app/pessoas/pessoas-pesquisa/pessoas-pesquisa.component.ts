@@ -4,6 +4,7 @@ import { PessoaFiltro } from '../pessoa.service';
 import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 import { ErrorHandlerService } from '../../core/error-handler.service';
 import { ConfirmationService } from 'primeng/components/common/confirmationservice';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -20,12 +21,13 @@ export class PessoasPesquisaComponent implements OnInit {
   constructor(
     private pessoaService: PessoaService,
     private errorHandler: ErrorHandlerService,
-    private confirmation: ConfirmationService
+    private confirmation: ConfirmationService,
+    private title: Title
     ) { }
 
   ngOnInit(): void {
     console.log("ngOnInit()");
-    this.pesquisar();
+    this.title.setTitle('Pesquisa de pessoas');
   }
 
   pesquisar(pagina = 0) {

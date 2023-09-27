@@ -93,8 +93,8 @@ export class LancamentoCadastroComponent extends BaseComponent implements OnInit
 
   adicionarLancamento(form: FormControl) {
     this.lancamentoService.adicionar(this.lancamento)
-      .then(() => {
-        console.log("Lançamento adicionado com sucesso!")
+      .then(lancamento => {
+        this.lancamento = lancamento;
         this.addMsgSuccess(this.lancamento.descricao, "Lançamento adicionado com sucesso!");
         //form.reset();
         //this.lancamento = new Lancamento();
