@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar *ngIf="exibindoNavbar()"></app-navbar>
 <p-growl [(value)]="msgs" life=8000></p-growl>
 <router-outlet></router-outlet>
 <!--
