@@ -17,6 +17,7 @@ import { LancamentoService } from '../lancamentos/lancamento.service';
 import { CategoriaService } from '../categorias/categoria.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
+import { AuthService } from '../seguranca/auth.service';
 
 
 
@@ -38,6 +39,7 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component'
     PessoaService,
     CategoriaService,
     ErrorHandlerService,
+    AuthService,
 
     MessageService,
     ConfirmationService,
