@@ -9,6 +9,8 @@ import { SegurancaRoutingModule } from './seguranca-rounting.module';
 
 import { LoginFormComponent } from './login-form/login-form.component';
 
+import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
+
 @NgModule({
   imports: [
     CommonModule,

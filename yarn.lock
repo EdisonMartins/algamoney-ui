@@ -131,7 +131,7 @@
     "symbol-observable" "1.2.0"
     "yargs-parser" "10.1.0"
 
-"@angular/common@^5.1.0", "@angular/common@5.2.11":
+"@angular/common@^4.4.6||^5.0.0", "@angular/common@^5.1.0", "@angular/common@5.2.11":
   "integrity" "sha512-LniJjGAeftUJDJh+2+LEjltcGen08C/VMxQ/eUYmesytKy1sN+MWzh3GbpKfEWtWmyUsYTG9lAAJNo3L3jPwsw=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-5.2.11.tgz"
   "version" "5.2.11"
@@ -210,6 +210,11 @@
   "version" "5.2.11"
   dependencies:
     "tslib" "^1.7.1"
+
+"@auth0/angular-jwt@^1.0.0":
+  "integrity" "sha512-9GDeX05Xo5KSP5dBeuC/pzNZUiBSUx580qF7qLqDqK6/FlY/0a6g3jsparN1Do3SGMSsnjzNj85X6diABYlHmg=="
+  "resolved" "https://registry.npmjs.org/@auth0/angular-jwt/-/angular-jwt-1.0.0.tgz"
+  "version" "1.0.0"
 
 "@ngtools/webpack@6.2.9":
   "integrity" "sha512-wZ9ROI4FdA9gnx21ULtA8u6Gmtig3BbT6EfUh2uYisjyL4P9k2p22sfY/Txwu/InnF4LDHOs5xZutOnGvC87vw=="
