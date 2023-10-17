@@ -18,10 +18,12 @@ import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 
     InputTextModule,
     ButtonModule,
+    JwtModule.forRoot({ config: { tokenGetter: () => { return ''; } } }),
 
     SegurancaRoutingModule
 
   ],
-  declarations: [LoginFormComponent]
+  declarations: [LoginFormComponent],
+  providers: [JwtHelperService]
 })
 export class SegurancaModule { }
