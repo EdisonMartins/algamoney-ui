@@ -17,6 +17,9 @@ export class AuthService {
     //Usuario: admin@algamoney.com
     //Senha: admin
 
+    //Usuario: maria@algamoney.com
+    //Senha: marira
+
   login(usuario: string, senha: string): Promise<void> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -56,5 +59,10 @@ export class AuthService {
       this.armazenarToken(token);
     }
   }
+
+  temPermissao(permissao: string) {
+    return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+  }
+
 
 }
