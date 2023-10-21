@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { LancamentoFiltro, LancamentoService } from './../lancamento.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
@@ -20,7 +21,8 @@ export class LancamentosPesquisaComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private errorHandler: ErrorHandlerService,
     private confirmation: ConfirmationService,
-    private title: Title
+    private title: Title,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -70,4 +72,10 @@ export class LancamentosPesquisaComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
     ;
   }
+
+  naoTemPermissao(permissao: string) {
+    return !this.auth.temPermissao(permissao);
+  }
+
+
 }
