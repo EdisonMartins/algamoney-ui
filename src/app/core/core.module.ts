@@ -18,6 +18,7 @@ import { CategoriaService } from '../categorias/categoria.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 import { AuthService } from '../seguranca/auth.service';
+import { NaoAutorizadoComponent } from './nao-autorizado.component';
 
 
 
@@ -28,7 +29,7 @@ import { AuthService } from '../seguranca/auth.service';
     ConfirmDialogModule,
     RouterModule
   ],
-  declarations: [NavbarComponent, PaginaNaoEncontradaComponent],
+  declarations: [NavbarComponent, PaginaNaoEncontradaComponent, NaoAutorizadoComponent],
   exports: [
     NavbarComponent,
     ConfirmDialogModule

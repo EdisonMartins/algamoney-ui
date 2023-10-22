@@ -23,7 +23,7 @@ export class ErrorHandlerService {
       }
 
       try {
-        errors = errorResponse.json();
+        errors = errorResponse;
 
         msg = errors[0].mensagemUsuario;
       } catch (e) { }
