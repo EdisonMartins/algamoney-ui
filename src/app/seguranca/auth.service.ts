@@ -5,6 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable()
 export class AuthService {
 
+  tokensRevokeUrl = 'http://localhost:8080/tokens/revoke';
   oauthTokenUrl = 'http://localhost:8080/oauth/token';
   jwtPayload: any;
 
@@ -101,5 +102,22 @@ export class AuthService {
 
     return false;
   }
+
+  limparAccessToken() {
+    localStorage.removeItem('token');
+    this.jwtPayload = null;
+  }
+
+  logout() {
+    // Remove o refresh_token
+    return this.http.delete(this.tokensRevokeUrl, { withCredentials: true })
+      .toPromise()
+      .then(() => {
+         // Remove o access_token.
+        this.limparAccessToken();
+      });
+  }
+
+
 
 }
