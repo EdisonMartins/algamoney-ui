@@ -9,6 +9,8 @@ import { MessageService } from 'primeng/components/common/messageservice';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent extends BaseComponent {
+  msgs: string;
+
   constructor(private router: Router,
      messageService: MessageService) {
     super(messageService);
