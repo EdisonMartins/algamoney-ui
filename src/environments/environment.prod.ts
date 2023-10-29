@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://algamoney-api.herokuapp.com',
-  whitelistedDomains: ["algamoney-api.herokuapp.com"],
+  apiUrl: 'http://localhost:8080',
+  whitelistedDomains: ["localhost:8080"],
   blacklistedRoutes: ["/oauth/token"],
 };
