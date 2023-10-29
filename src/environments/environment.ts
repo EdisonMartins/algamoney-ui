@@ -4,5 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:8080',
+   // RexExp → por isso estão delimitados por slash “/”
+   whitelistedDomains: [/localhost:8080/],
+   blacklistedRoutes: [/\/oauth\/token/],
 };
