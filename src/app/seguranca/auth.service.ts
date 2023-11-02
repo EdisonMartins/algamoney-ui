@@ -12,7 +12,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private jwtHelper: JwtHelperService) {
+    private jwtHelper: JwtHelperService
+  ) {
     this.carregarToken();
   }
 
@@ -23,16 +24,17 @@ export class AuthService {
   //Senha: marira
 
   login(usuario: string, senha: string): Promise<void> {
-    let headers = new HttpHeaders();
-    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    // Basic angular:@ngul@r0
-    headers = headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+       // Basic angular:@ngul@r0
+    const headers = new HttpHeaders()
+    .append('Content-Type', 'application/x-www-form-urlencoded')
+    .append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
     return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
       .toPromise()
       .then(response => {
+        console.log("Headers: " + headers);
         console.log(response);
         this.armazenarToken(response['access_token']);
       })
@@ -49,6 +51,7 @@ export class AuthService {
 
   public armazenarToken(token: string) {
     this.jwtPayload = this.jwtHelper.decodeToken(token);
+    console.log("jwtPayload: ")
     console.log(this.jwtPayload);
 
     localStorage.setItem('token', token);
@@ -114,7 +117,7 @@ export class AuthService {
     return this.http.delete(this.tokensRevokeUrl, { withCredentials: true })
       .toPromise()
       .then(() => {
-         // Remove o access_token.
+        // Remove o access_token.
         this.limparAccessToken();
       });
   }

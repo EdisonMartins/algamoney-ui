@@ -1,6 +1,6 @@
 // Importa módulo express.
 console.log("Iniciando servidor!")
-const porta = 8000;
+const porta = 4200;
 const express = require('express');
 // Obtém o objeto que representa o servidor web.
 const app = express();

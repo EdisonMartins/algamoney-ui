@@ -28,8 +28,6 @@ registerLocaleData(localePT);
 
     GrowlModule,
     CoreModule,
-    LancamentosModule,
-    PessoasModule,
     SegurancaModule,
     AppRoutingModule
 

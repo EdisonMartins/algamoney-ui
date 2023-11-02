@@ -20,18 +20,14 @@ export class LancamentoService {
   lancamentosUrl: string;
 
   constructor(private http: HttpClient) {
+    console.log("Ambiente: " + environment.ambiente);
     this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
   }
 
   pesquisar(filtro: LancamentoFiltro): Promise<any> {
-    let params = new HttpParams();
-    let headers = new HttpHeaders();
-    // Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==
-    // admin@algamoney.com:admin
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    params = params.set('page', filtro.pagina.toString());
-    params = params.set('size', filtro.itensPorPagina.toString());
+    let params = new HttpParams()
+    .set('page', filtro.pagina.toString())
+    .set('size', filtro.itensPorPagina.toString());
 
     if (filtro.descricao) {
       console.log("filtro.descricao: " + filtro.descricao);
@@ -49,7 +45,7 @@ export class LancamentoService {
     }
 
 
-    return this.http.get(`${this.lancamentosUrl}?resumo`, { headers, params })
+    return this.http.get(`${this.lancamentosUrl}?resumo`, { params, withCredentials: true  })
       .toPromise()
       .then((response: any) => {
         const lancamentos = response['content'];
@@ -65,7 +61,7 @@ export class LancamentoService {
 
   excluir(codigo: number): Promise<void> {
     let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    //headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
     return this.http.delete(`${this.lancamentosUrl}/${codigo}`, { headers })
       .toPromise()
@@ -74,7 +70,7 @@ export class LancamentoService {
 
   adicionar(lancamento: Lancamento): Promise<Lancamento> {
     let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    //headers = headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     headers = headers.append('Content-Type', 'application/json');
 
     return this.http.post<Lancamento>(this.lancamentosUrl, lancamento, { headers })
