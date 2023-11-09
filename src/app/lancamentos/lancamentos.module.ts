@@ -15,10 +15,11 @@ import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { ButtonModule } from 'primeng/components/button/button';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
+import { LancamentoCadastroReativoComponent } from './lancamento-cadastro-reativo/lancamento-cadastro-reativo.component';
 
 
 
@@ -27,6 +28,7 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
     CommonModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
     InputTextModule,
     ButtonModule,
     DataTableModule,
@@ -42,7 +44,8 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
   ],
   declarations: [
     LancamentosPesquisaComponent,
-    LancamentoCadastroComponent
+    LancamentoCadastroComponent,
+    LancamentoCadastroReativoComponent
 ],
 
   exports: []
